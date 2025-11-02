@@ -1,0 +1,1437 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Causal Induction</title>
+    <link rel="stylesheet" href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" />
+    <link rel="stylesheet" href="" />
+    <script src="https://unpkg.com/jspsych@7.3.4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.2.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.4"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-slider-response@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
+  </head>
+  <body>
+    <div id="jspsych"></div>
+    <script type="module">
+      const experiment = {
+  "schema_version": "1.0",
+  "meta": {
+    "title": "Causal Induction",
+    "description": "",
+    "seed": 1
+  },
+  "resources": {
+    "jspsychAssets": []
+  },
+  "nodes": [
+    {
+      "id": "trial-1",
+      "kind": "trial",
+      "plugin": "html-button-response",
+      "params": {
+        "stimulus": "<p>{{cue}}</p>\n<p style = \"font-size: 14pt;\">Will the patient recover?</p>",
+        "choices": [
+          "Very unlikely",
+          "Very likely"
+        ],
+        "response_ends_trial": true
+      },
+      "name": "Cue",
+      "label": "Cue",
+      "conditional_function": {
+        "__builderType": "function",
+        "source": "condition === \"discreet\""
+      }
+    },
+    {
+      "id": "trial-2",
+      "kind": "trial",
+      "plugin": "html-button-response",
+      "params": {
+        "stimulus": "<p>{{outcome}}</p>",
+        "choices": [
+          "Next",
+          "Back"
+        ],
+        "response_ends_trial": true
+      },
+      "name": "Outcome",
+      "label": "Outcome"
+    },
+    {
+      "id": "trial-4",
+      "kind": "trial",
+      "plugin": "html-button-response",
+      "params": {
+        "stimulus": "<p>{{cue}}</p>\n<p style = \"font-size: 14pt;\">Will the patient recover?</p>",
+        "choices": [
+          "Very unlikely",
+          "Very likely"
+        ],
+        "response_ends_trial": true
+      },
+      "name": "Cue",
+      "label": "Cue",
+      "conditional_function": {
+        "__builderType": "function",
+        "source": "condition === \"discreet\""
+      }
+    },
+    {
+      "id": "trial-5",
+      "kind": "trial",
+      "plugin": "html-button-response",
+      "params": {
+        "stimulus": "<p>{{outcome}}</p>",
+        "choices": [
+          "Next",
+          "Back"
+        ],
+        "response_ends_trial": true
+      },
+      "name": "Outcome",
+      "label": "Outcome"
+    },
+    {
+      "id": "trial-6",
+      "kind": "trial",
+      "plugin": "instructions",
+      "params": {
+        "response_ends_trial": true,
+        "pages": [
+          "<h1>Welcome to the task!</h1>\n\n<p>In this experiment, you are asked to imagine that you are a medical researcher studying a new illness caused by a virus in the human body</p>\n     <p>An experimental drug, Cloveritol, has been developed in the hopes of treating the disease effectively. Laboratory results of Cloveritol have been promising but the drug&#39;s efficacy and side effects have not yet been tested on patients.</p>",
+          "<p>Your job is to assess the new drug while you treat patients with the disease.</p>\n      <p>You will see a series of patients one by one. For each one, you are first shown whether the patient was administered Cloveritol or no treatment.</p>\n      <p>You will be asked to predict the patient&#39;s chances of recovery.<p>\n\n      <p>You will then observe whether the patient recovered by the end of the observation period, or whether they were still sick.</p>",
+          "<p>You will have the opportunity to treat a series of patients. At the end of these trials, you will be asked to judge how effective Cloveritol is for treating this particular illness.</p>\n      <p>Try to use only the knowledge you have learned from the experiment to make your decisions.</p>"
+        ],
+        "show_clickable_nav": true,
+        "allow_backward": true,
+        "allow_keys": true,
+        "key_forward": "ArrowRight",
+        "key_backward": "ArrowLeft",
+        "button_label_next": "Next",
+        "button_label_previous": "Previous"
+      },
+      "name": "Instructions",
+      "label": "Instructions"
+    },
+    {
+      "id": "trial-7",
+      "kind": "trial",
+      "plugin": "instructions",
+      "params": {
+        "response_ends_trial": true,
+        "pages": [
+          "<h2>How effective was Cloveritol?</h2>\n    <p>In this experiment you observed how patients recovered <strong>with</strong> and <strong>without</strong> the drug <em>Cloveritol</em>.</p>\n    <p style=\"max-width:60ch; margin:0 auto; text-align:left;\">\n      &bull; Sometimes patients received <strong>Cloveritol</strong>.<br>\n      &bull; Sometimes patients received <strong>no treatment</strong>.\n    </p>\n    <p>On the next screen you will see a slider labelled from &ldquo;-100&rdquo; to &ldquo;+100.&rdquo;</p>",
+          "<h2>Using the slider</h2>\n    <p style=\"max-width:60ch; margin:0 auto; text-align:left;\">\n      &bull; Values <strong>below 0</strong> mean you think Cloveritol made recovery <em>worse</em> compared to no treatment.<br><br>\n      &bull; Values <strong>above 0</strong> mean you think Cloveritol made recovery <em>better</em> compared to no treatment.<br><br>\n      &bull; If you think Cloveritol had <strong>no effect</strong>, place the slider at 0.<br><br>\n      &bull; The farther you move the slider from the centre, the <em>stronger</em> the effect you are reporting.\n    </p>",
+          "<h2>Before you continue</h2>\n    <p style=\"max-width:60ch; margin:0 auto; text-align:left;\">\n      &bull; Use your mouse or trackpad to move the slider.<br>\n      &bull; Base your judgment <strong>only on what you observed during this experiment</strong>.<br>\n      &bull; There are no right or wrong answers &ndash; we are interested in your honest evaluation.\n    </p>\n    <p>When you&#39;re ready, click &ldquo;Next&rdquo; to record your judgment.</p>"
+        ],
+        "show_clickable_nav": true,
+        "allow_backward": true,
+        "allow_keys": true,
+        "key_forward": "ArrowRight",
+        "key_backward": "ArrowLeft",
+        "button_label_next": "Next",
+        "button_label_previous": "Back"
+      },
+      "name": "Efficacy Instructions",
+      "label": "Efficacy Instructions"
+    },
+    {
+      "id": "trial-8",
+      "kind": "trial",
+      "plugin": "html-slider-response",
+      "params": {
+        "stimulus": "<img src=\"https://firebasestorage.googleapis.com/v0/b/jspsych-builder-5b1cf.firebasestorage.app/o/users%2FEIGahsILLqfUZJBdE0qIgS0hVwi2%2Fimages%2F1762048052189_cloveritolvnotreat.png?alt=media&amp;token=6437366e-11f1-437f-a386-9fd3bcce8961\" alt=\"\" style=\"width: 269px; height: 202px;\"><p><font size=\"5\" color=\"#0056d6\">Cloveritol vs No treatment</font><br></p><p>&nbsp; &nbsp; On a scale from -100% to 100%, rate how effective you think the treatment was compared to having no treatment at all &nbsp;</p><p>&nbsp; &nbsp;<font color=\"#606060\"> &nbsp; NOTE: intermediate negative values indicate the drug actually made recovery worse, whereas intermediate positive values indicate the drug was effective at improving recovery</font></p><p>&nbsp; &nbsp;&nbsp;</p>",
+        "labels": [
+          "-100 (worsens recovery)",
+          "0 (ineffective)",
+          "+100 (improves recovery)"
+        ],
+        "css_classes": [
+          "eff_rating"
+        ],
+        "response_ends_trial": true,
+        "min": -100,
+        "max": 100,
+        "slider_start": 0,
+        "step": 1,
+        "button_label": "Continue",
+        "on_load": {
+          "__builderType": "function",
+          "source": "function () {\n    // ---------- Inject scoped CSS once ----------\n    if (!document.getElementById('eff-rating-css')) {\n      const style = document.createElement('style');\n      style.id = 'eff-rating-css';\n      style.textContent = `\n        /* Theme variables (scoped to this trial via .eff_rating) */\n        .eff_rating {\n          --accent: #275AC5;\n          --accent-soft: rgba(39, 90, 197, 0.12);\n          --track: #e9ecef;\n          --track-dark: #dfe3e7;\n          --thumb: #ffffff;\n          --shadow: rgba(0, 0, 0, 0.25);\n          --neg: #d9534f;\n          --pos: #28a745;\n        }\n\n        /* Layout niceties */\n        .eff_rating .jspsych-html-slider-response-container {\n          max-width: 780px;\n          margin: 18px auto 0;\n        }\n\n        /* Value bubble above the thumb */\n        .eff_rating .slider-value {\n          position: relative;\n          height: 0;\n        }\n        .eff_rating .slider-value .bubble {\n          position: absolute;\n          top: -36px;\n          transform: translateX(-50%);\n          padding: 4px 8px;\n          font-size: 13px;\n          line-height: 1;\n          background: var(--accent);\n          color: #fff;\n          border-radius: 999px;\n          box-shadow: 0 2px 6px var(--accent-soft);\n          user-select: none;\n          pointer-events: none;\n          transition: opacity 120ms ease;\n          opacity: 0; /* hidden until first interaction */\n        }\n\n        /* Base slider styling */\n        .eff_rating input[type=\"range\"] {\n          width: 100%;\n          -webkit-appearance: none;\n          background: transparent;\n          outline: none;\n        }\n\n        /* Track */\n        .eff_rating input[type=\"range\"]::-webkit-slider-runnable-track {\n          height: 12px;\n          background: linear-gradient(90deg, var(--track) 0%, var(--track) 100%);\n          border-radius: 999px;\n          box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 var(--track-dark);\n        }\n        .eff_rating input[type=\"range\"]::-moz-range-track {\n          height: 12px;\n          background: var(--track);\n          border-radius: 999px;\n          box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 var(--track-dark);\n        }\n\n        /* Thumb (WebKit) */\n        .eff_rating input[type=\"range\"]::-webkit-slider-thumb {\n          -webkit-appearance: none;\n          width: 22px;\n          height: 22px;\n          border-radius: 50%;\n          background: var(--thumb);\n          border: 2px solid #fff;\n          box-shadow: 0 2px 6px var(--shadow);\n          margin-top: -5px; /* centers on 12px track */\n          transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;\n        }\n        /* Thumb (Firefox) */\n        .eff_rating input[type=\"range\"]::-moz-range-thumb {\n          width: 22px;\n          height: 22px;\n          border-radius: 50%;\n          background: var(--thumb);\n          border: 2px solid #fff;\n          box-shadow: 0 2px 6px var(--shadow);\n          transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;\n        }\n\n        /* Hover / active feel */\n        .eff_rating input[type=\"range\"]:hover::-webkit-slider-thumb,\n        .eff_rating input[type=\"range\"]:hover::-moz-range-thumb {\n          transform: scale(1.05);\n        }\n        .eff_rating input[type=\"range\"]:active::-webkit-slider-thumb,\n        .eff_rating input[type=\"range\"]:active::-moz-range-thumb {\n          transform: scale(1.12);\n          box-shadow: 0 3px 10px var(--shadow);\n        }\n\n        /* Accessible focus ring */\n        .eff_rating input[type=\"range\"]:focus-visible::-webkit-slider-thumb,\n        .eff_rating input[type=\"range\"]:focus-visible::-moz-range-thumb {\n          outline: 3px solid var(--accent);\n          outline-offset: 2px;\n        }\n\n        /* Hide thumb until first interaction */\n        .eff_rating input[type=\"range\"][data-thumb-hidden=\"1\"]::-webkit-slider-thumb { opacity: 0; }\n        .eff_rating input[type=\"range\"][data-thumb-hidden=\"1\"]::-moz-range-thumb    { opacity: 0; }\n\n        /* Label polish */\n        .eff_rating .jspsych-html-slider-response-labels {\n          font-size: 13px;\n          color: #444;\n          margin-top: 6px;\n        }\n      `;\n      document.head.appendChild(style);\n    }\n\n    const slider = document.getElementById('jspsych-html-slider-response-response');\n    if (!slider) return;\n\n    // Hide thumb initially\n    slider.setAttribute('data-thumb-hidden', '1');\n\n    // Insert value bubble\n    const container = slider.parentElement; // .jspsych-html-slider-response-container\n    const valWrap = document.createElement('div');\n    valWrap.className = 'slider-value';\n    const bubble = document.createElement('div');\n    bubble.className = 'bubble';\n    bubble.textContent = '0%';\n    valWrap.appendChild(bubble);\n    container.insertBefore(valWrap, slider);\n\n    // Helpers\n    const min = Number(slider.min);\n    const max = Number(slider.max);\n    const range = max - min;\n\n    const setTrackFill = () => {\n      // Diverging track hint: subtle tint to left/right of zero\n      // Compute position of zero (50%) and current value %\n      const val = Number(slider.value);\n      const p = ((val - min) / range) * 100;\n      const zeroP = ((0 - min) / range) * 100;\n\n      // Gradient: red to center to green, with light neutral base\n      // We overlay a translucent diverging gradient on the neutral track.\n      slider.style.background = `\n        linear-gradient(90deg,\n          rgba(217,83,79,0.18) 0%,\n          rgba(217,83,79,0.18) ${zeroP}%,\n          rgba(40,167,69,0.18) ${zeroP}%,\n          rgba(40,167,69,0.18) 100%)\n      `;\n\n      // Thumb tint by sign (purely cosmetic)\n      const isNeg = val < 0;\n      const thumbColor = isNeg ? 'rgba(217,83,79,0.9)' : (val > 0 ? 'rgba(40,167,69,0.9)' : 'var(--thumb)');\n      slider.style.setProperty('--thumbDynamic', thumbColor);\n    };\n\n    // Apply thumb dynamic color via inline style hook\n    const setThumbColorCSS = () => {\n      // Only needs to be injected once\n      if (document.getElementById('eff-thumb-dynamic-css')) return;\n      const s = document.createElement('style');\n      s.id = 'eff-thumb-dynamic-css';\n      s.textContent = `\n        .eff_rating input[type=\"range\"]::-webkit-slider-thumb { background: var(--thumbDynamic, var(--thumb)); }\n        .eff_rating input[type=\"range\"]::-moz-range-thumb    { background: var(--thumbDynamic, var(--thumb)); }\n      `;\n      document.head.appendChild(s);\n    };\n    setThumbColorCSS();\n\n    // Position the value bubble over the thumb\n    const setBubble = () => {\n      const val = Number(slider.value);\n      const percent = (val - min) / range; // 0..1\n      bubble.textContent = `${val}`;\n\n      // Calculate pixel position relative to slider width\n      const sliderRect = slider.getBoundingClientRect();\n      const x = sliderRect.left + sliderRect.width * percent;\n\n      // Position bubble (relative to container)\n      const containerRect = container.getBoundingClientRect();\n      bubble.style.left = `${x - containerRect.left}px`;\n\n      // Reveal bubble after first interaction\n      if (slider.getAttribute('data-thumb-hidden') === '0') {\n        bubble.style.opacity = '1';\n      }\n    };\n\n    // First-render visuals\n    setTrackFill();\n    setBubble();\n\n    // Reveal on first interaction + keep visuals updated\n    const reveal = () => {\n      slider.setAttribute('data-thumb-hidden', '0');\n      setTrackFill();\n      setBubble();\n      slider.removeEventListener('pointerdown', reveal);\n      slider.removeEventListener('keydown', reveal);\n    };\n    slider.addEventListener('input', () => { setTrackFill(); setBubble(); });\n    slider.addEventListener('pointerdown', reveal, { once: true });\n    slider.addEventListener('keydown', reveal, { once: true });\n\n    // Recompute on resize (keeps bubble aligned)\n    window.addEventListener('resize', setBubble);\n  }"
+        }
+      },
+      "name": "Efficacy Rating",
+      "label": "Efficacy Rating"
+    },
+    {
+      "id": "trial-3",
+      "kind": "trial",
+      "plugin": "html-slider-response",
+      "params": {
+        "stimulus": "<p>{{cue}}</p>\n<p style = \"font-size: 14pt;\">Will the patient recover?</p>",
+        "labels": [
+          "Very unlikely",
+          "Even chance",
+          "Very likely"
+        ],
+        "css_classes": [
+          "conf-slider"
+        ],
+        "response_ends_trial": true,
+        "min": 0,
+        "max": 10,
+        "slider_start": 5,
+        "step": 1,
+        "slider_width": 800,
+        "button_label": "Continue",
+        "require_movement": true,
+        "on_load": {
+          "__builderType": "function",
+          "source": "function(){\n// Hide thumb until participant interacts\nconst slider = document.querySelector('.conf-slider input.jspsych-slider');\nif (slider) {\n  // Add event listeners for first interaction\n  const activate = () => {\n    slider.classList.add('thumb-visible');\n    slider.removeEventListener('mousedown', activate);\n    slider.removeEventListener('touchstart', activate);\n  };\n  slider.addEventListener('mousedown', activate);\n  slider.addEventListener('touchstart', activate);\n}\n}"
+        }
+      },
+      "name": "Cue (Slider)",
+      "label": "Cue (Slider)",
+      "conditional_function": {
+        "__builderType": "function",
+        "source": "condition === \"continuous\""
+      }
+    },
+    {
+      "id": "trial-9",
+      "kind": "trial",
+      "plugin": "html-slider-response",
+      "params": {
+        "stimulus": "<p>{{cue}}</p>\n<p style = \"font-size: 14pt;\">Will the patient recover?</p>",
+        "labels": [
+          "Very unlikely",
+          "Even chance",
+          "Very likely"
+        ],
+        "css_classes": [
+          "conf-slider"
+        ],
+        "response_ends_trial": true,
+        "min": 0,
+        "max": 10,
+        "slider_start": 5,
+        "step": 1,
+        "slider_width": 800,
+        "button_label": "Continue",
+        "require_movement": true,
+        "on_load": {
+          "__builderType": "function",
+          "source": "function(){\n// Hide thumb until participant interacts\nconst slider = document.querySelector('.conf-slider input.jspsych-slider');\nif (slider) {\n  // Add event listeners for first interaction\n  const activate = () => {\n    slider.classList.add('thumb-visible');\n    slider.removeEventListener('mousedown', activate);\n    slider.removeEventListener('touchstart', activate);\n  };\n  slider.addEventListener('mousedown', activate);\n  slider.addEventListener('touchstart', activate);\n}\n}"
+        }
+      },
+      "name": "Cue (Slider)",
+      "label": "Cue (Slider)",
+      "conditional_function": {
+        "__builderType": "function",
+        "source": "condition === \"continuous\""
+      }
+    },
+    {
+      "id": "trial-10",
+      "kind": "trial",
+      "plugin": "preload",
+      "params": {
+        "response_ends_trial": true,
+        "images": [
+          "https://firebasestorage.googleapis.com/v0/b/jspsych-builder-5b1cf.firebasestorage.app/o/users%2FEIGahsILLqfUZJBdE0qIgS0hVwi2%2Fimages%2F1762048048450_cloveritol.png"
+        ]
+      },
+      "name": "Preload 1",
+      "label": "Preload 1"
+    },
+    {
+      "id": "trial-12",
+      "kind": "trial",
+      "plugin": "instructions",
+      "params": {
+        "response_ends_trial": true,
+        "pages": [
+          "<div style=\"padding-left: 50px;\">\n    <div style=\"text-align: left;\">\n      <img style=\"height: 100px; float: right\" src=\"https://usyd-meta-lab.github.io/files/usyd.ico\"></img>\n      <h1>Participant Information Statement</h1>\n      <h1 style=\"color:#e1310e\">Research Study: Metacognition and Cognitive Performance</h1>\n      Dr Kit Double (Responsible Researcher)<br>\n      School of Psychology, Faculty of Science<br>\n      Phone: +61 2 8627 8636| Email: kit.double@sydney.edu.au\n    </div>\n    <hr>\n    <div style=\"text-align: left;\">\n      <h4 style=\"color:#e1310e\">1.  What is this study about?</h2>\n      We are conducting a research study about how people monitor and control their cognitive performance. This will help us understand how people adapt, monitor and respond during cognitive tasks. Taking part in this study is voluntary. <br><br>\n      Please read this sheet carefully and ask questions about anything that you don&#39;t understand or want to know more about.\n      <h4 style=\"color:#e1310e\">2. Who is running the study?</h2>\n      The study is being carried out by the following researchers:<br><br>\n      <li>Dr Kit Double, Senior Lecturer, School of Psychology, University of Sydney</li>\n      <li>Professor Damian Birney, School of Psychology, University of Sydney</li>\n      <li>Associate Professor Micah Goldwater, Lecturer, School of Psychology, University of Sydney</li>\n      <li>Dr Hilary Don, Research Officer, School of Psychology, University of Sydney</li>\n      <li>Ms Cynthia Feng, PhD Student, School of Psychology, University of Sydney</li>\n      <li>Ms Yueting Zhan, PhD Student, School of Psychology, University of Sydney</li>\n      <li>Ms Mariya Bartosh, Honours Student, School of Psychology, University of Sydney</li>\n      <li>Mr Anthony Mbonu, Honours Student, School of Psychology, University of Sydney</li>\n      <li>Mr Riley Leckie, Research Assistant, School of Psychology, University of Sydney</li>\n      <li>Ms Imann Mian, Research Assistant, School of Psychology, University of Sydney</li>\n      <li>Mr Felix Pfeifer, Research Assistant, School of Psychology, University of Sydney</li>\n      <li>Mr Aditya Sridhar, Research Assistant, School of Psychology, University of Sydney</li>\n      <br><br>\n      Data from this study may form the basis of the PhD theses of Yueting Zhan and Cynthia Feng as well as the Honours theses of Mariya Bartosh and Anthony Mbonu.<br><br>\n      This study is being funded by the Australian Research Council Discovery Program (DE230101223). </li>\n      <div style=\"text-align: left;\">\n        <h4 style=\"color:#e1310e\">3. What will the study involve for me?</h2>\n        If you decide to take part in this study, you will be asked to complete several computerised cognitive tasks and answer a number of surveys about yourself. <br><br>\n        The study will take approximately ${Math.ceil(task_time/15)*15} minutes to complete. The study will be completed online.\n        <h4 style=\"color:#e1310e\">4. Can I withdraw once I&#39;ve started?</h2>\n        By participating in this study, you are providing your consent for us to collect information about you. Being in this study is completely voluntary and you do not have to take part. Your decision will not affect your current or future relationship with the researchers or anyone else at The University of Sydney.<br><br>\n        You can withdraw by closing the study website on your computer. If you decide to withdraw, we will not collect any more information from you. Any information that we have already collected will be kept in our study records and may be included in the study results. If you would prefer that we remove information that we have already collected from you, please contact Dr Kit Double (kit.double@sydney.edu.au). If you do not submit a completed response you will not receive any compensation.\n        <h4 style=\"color:#e1310e\">5.  Are there any risks or costs?</h2>\n        Aside from giving up your time, we do not expect that there will be any risks or costs associated with taking part in this study.\n        <h4 style=\"color:#e1310e\">6.  Are there any benefits?</h2>\n        Course credit will be awarded to you after your participation, as indicated by your psychology unit of study syllabus. The study will take approximately ${Math.ceil(task_time/15)*15} minutes and you will receive ${Math.ceil(task_time/15)*0.25} course credit.<br><br>\n        If you do not wish to complete this study, you may obtain course credit by doing other studies on SONA or by undertaking an alternative assignment.\n        <h4 style=\"color:#e1310e\">7.  What will happen to information that is collected?</h2>\n        By participating in this study, you are providing your consent for us to collect information about you for the purposes of this study.<br><br>\n        Any information you provide us will be stored securely and we will only disclose it with your permission, unless we are required by law to release information. We are planning for the study findings to be published. You will not be individually identifiable in these publications.<br><br>\n        We will keep the information we collect for this study, and we may use it in future projects.<br><br>\n        By providing your consent you are allowing us to use your information in future projects. We don&#39;t know at this stage what these other projects will involve. We will seek ethical approval before using the information in these future projects.<br><br>\n        We intend to submit the information from this project to a public database for research information, so that other researchers can access it and use it in their projects. Before we do so, we will take out all the identifying information so that the people we give it to won&#39;t know whose information it is. They won&#39;t know that you participated in the study and they won&#39;t be able to link you to any of the information you provided.\n        <h4 style=\"color:#e1310e\">8. Will I be told the results of the study?</h2>\n        You have a right to receive feedback about the overall results of this study. To receive feedback about the overall results of the study please email Dr Kit Double (<a href=\"mailto:kit.double@sydney.edu.au\">kit.double@sydney.edu.au</a>). This feedback will be in the form of a brief lay summary.\n        <h4 style=\"color:#e1310e\">9. What if I would like further information?</h2>\n        When you have read this information, the following researcher/s will be available to discuss it with you further and answer any questions you may have: <br><br>\n        <li>Dr Kit Double, Research Fellow, School of Psychology, University of Sydney. Phone: +61 2 8627 8636| Email: kit.double@sydney.edu.au </li>\n        <h4 style=\"color:#e1310e\">10.  What if I have a complaint or any concerns?</h2>\n        The ethical aspects of this study have been approved by the Human Research Ethics Committee (HREC) of The University of Sydney [2022/796] according to the National Statement on Ethical Conduct in Human Research (2007). If you are concerned about the way this study is being conducted or you wish to make a complaint to someone independent from the study, please contact the University:<br><br>\n        Human Ethics Manager<br>\n        human.ethics@sydney.edu.au<br>\n        +61 2 8627 8176<br>\n        <button onclick=\"window.print();return false;\" />Print</button>\n        <h4 style=\"color:#e1310e; text-align: center;\">This information sheet is for you to keep</h3>\n      </div>\n      <div style=\"text-align: center;\"></div>\n                        \n        <p><strong>I confirm the following:</strong></p>\n        \n  <ul>\n    <li>I consent to participate in this study</li>\n    <input type=\"checkbox\" id=\"consent_yes\" name=\"consent\" value=\"yes\">\n    <label for=\"consent_yes\"> Yes </label> &nbsp;&nbsp;&nbsp;\n    <input type=\"checkbox\" id=\"consent_no\" name=\"consent\" value=\"no\">\n    <label for=\"consent_no\"> No </label><br>\n  </ul>\n    </div>"
+        ],
+        "show_clickable_nav": true,
+        "allow_backward": false,
+        "allow_keys": true,
+        "key_forward": "ArrowRight",
+        "key_backward": "ArrowLeft",
+        "button_label_next": "Next",
+        "button_label_previous": "Previous",
+        "on_load": {
+          "__builderType": "function",
+          "source": "function() {\n                    // Disable Continue button initially\n                    const nextButton = document.querySelector('#jspsych-instructions-next');\n                    nextButton.disabled = true;\n                    nextButton.style.opacity = 0.5;\n                    \n                    const yesBox = document.getElementById('consent_yes');\n                    const noBox = document.getElementById('consent_no');\n                    \n                    yesBox.addEventListener('change', function() {\n                        if (yesBox.checked) {\n                            noBox.checked = false; // ensure only one is selected\n                            nextButton.disabled = false;\n                            nextButton.style.opacity = 1;\n                        } else {\n                            nextButton.disabled = true;\n                            nextButton.style.opacity = 0.5;\n                        }\n                    });\n                    \n                    noBox.addEventListener('change', function() {\n                        if (noBox.checked) {\n                            yesBox.checked = false;\n                            nextButton.disabled = true;\n                            nextButton.style.opacity = 0.5;\n                            alert(\"You must provide consent (Yes) to participate in this study.\");\n                        }\n                    });\n                }"
+        }
+      },
+      "name": "PIS/Consent",
+      "label": "PIS/Consent"
+    },
+    {
+      "id": "trial-13",
+      "kind": "trial",
+      "plugin": "survey-text",
+      "params": {
+        "response_ends_trial": true,
+        "questions": [
+          {
+            "prompt": "Did you experience any issues while completing this study?",
+            "rows": 5
+          }
+        ],
+        "autocomplete": "off"
+      },
+      "name": "Debug",
+      "label": "Debug"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "trial-10",
+      "name": "Preload 1",
+      "timeline": [
+        "trial-10"
+      ]
+    },
+    {
+      "id": "trial-12",
+      "name": "PIS/Consent",
+      "timeline": [
+        "trial-12"
+      ]
+    },
+    {
+      "id": "trial-6",
+      "name": "Instructions",
+      "timeline": [
+        "trial-6"
+      ]
+    },
+    {
+      "id": "block-1",
+      "name": "High Training",
+      "timeline": [
+        "trial-1",
+        "trial-3",
+        "trial-2"
+      ],
+      "conditional_function": {
+        "__builderType": "function",
+        "source": "outcome_condition === \"High\""
+      },
+      "table": {
+        "rows": [
+          {
+            "cue": "<img src=https://firebasestorage.googleapis.com/v0/b/jspsych-builder-5b1cf.firebasestorage.app/o/users%2FEIGahsILLqfUZJBdE0qIgS0hVwi2%2Fimages%2F1762048048450_cloveritol.png?alt=media&amp;token=398546cd-6ce4-44ab-ba4d-ddd353b64c11 style=color: rgb(240, 243, 248); font-size: 14px; max-width: 120px; height: 200px;><br><font size=5> Cloveritol</font>",
+            "outcome": "<font color=green size=5> Patient Recovered</font>",
+            "frequency": "12"
+          },
+          {
+            "cue": "<img src=https://firebasestorage.googleapis.com/v0/b/jspsych-builder-5b1cf.firebasestorage.app/o/users%2FEIGahsILLqfUZJBdE0qIgS0hVwi2%2Fimages%2F1762048048450_cloveritol.png?alt=media&amp;token=398546cd-6ce4-44ab-ba4d-ddd353b64c11 style=color: rgb(240, 243, 248); font-size: 14px; max-width: 120px; height: 200px;><br><font size=5> Cloveritol</font>",
+            "outcome": "<font color=red size=5>No Recovery</font>",
+            "frequency": "3"
+          },
+          {
+            "cue": "<div style = width:120px;height:200px;></div><font size=5> No Treatment</font>",
+            "outcome": "<font color=green size=5> Patient Recovered</font>",
+            "frequency": "12"
+          },
+          {
+            "cue": "<div style = width:120px;height:200px;></div><font size=5> No Treament</font>",
+            "outcome": "<font color=red size=5>No Recovery</font>",
+            "frequency": "3"
+          }
+        ],
+        "order": "random",
+        "sampleSize": null,
+        "samplingMode": "frequency",
+        "weights": null,
+        "frequencies": [
+          12,
+          3,
+          12,
+          3
+        ],
+        "withReplacement": false,
+        "repeat": true,
+        "previewRow": 1
+      }
+    },
+    {
+      "id": "block-2",
+      "name": "Low Training",
+      "timeline": [
+        "trial-4",
+        "trial-9",
+        "trial-5"
+      ],
+      "conditional_function": {
+        "__builderType": "function",
+        "source": "outcome_condition === \"Low\""
+      },
+      "table": {
+        "rows": [
+          {
+            "cue": "<img src=http://localhost:3000/uploads/default/cloveritol_1761900224553_cd7b137e01d19afe.png alt=cloveritol_1761900224553_cd7b137e01d19afe.png style=color: rgb(240, 243, 248); font-size: 14px; max-width: 120px; height: 200px;><br><font size=5> Cloveritol</font>",
+            "outcome": "<font color=green size=5> Patient Recovered</font>",
+            "frequency": "3"
+          },
+          {
+            "cue": "<img src=http://localhost:3000/uploads/default/cloveritol_1761900224553_cd7b137e01d19afe.png alt=cloveritol_1761900224553_cd7b137e01d19afe.png style=color: rgb(240, 243, 248); font-size: 14px; max-width: 120px; height: 200px;><br><font size=5> Cloveritol</font>",
+            "outcome": "<font color=red size=5>No Recovery</font>",
+            "frequency": "12"
+          },
+          {
+            "cue": "<div style = width:120px;height:200px;></div><font size=5> No Treatment</font>",
+            "outcome": "<font color=green size=5> Patient Recovered</font>",
+            "frequency": "3"
+          },
+          {
+            "cue": "<div style = width:120px;height:200px;></div><font size=5> No Treament</font>",
+            "outcome": "<font color=red size=5>No Recovery</font>",
+            "frequency": "12"
+          }
+        ],
+        "order": "random",
+        "sampleSize": null,
+        "samplingMode": "frequency",
+        "weights": null,
+        "frequencies": [
+          3,
+          12,
+          3,
+          12
+        ],
+        "withReplacement": false,
+        "repeat": true,
+        "previewRow": 1
+      }
+    },
+    {
+      "id": "trial-7",
+      "name": "Efficacy Instructions",
+      "timeline": [
+        "trial-7"
+      ]
+    },
+    {
+      "id": "trial-8",
+      "name": "Efficacy Rating",
+      "timeline": [
+        "trial-8"
+      ]
+    },
+    {
+      "id": "trial-13",
+      "name": "Debug",
+      "timeline": [
+        "trial-13"
+      ]
+    }
+  ],
+  "options": {
+    "rawJs": "",
+    "rawCss": "/* ================== scope: only the trial with class 'conf-slider' ================== */\n\n/* One source of width; everything else uses 100% of this */\n.conf-slider .jspsych-html-slider-response-container{\n  width: min(900px, 92vw) !important;\n  margin: 8px auto 0 auto;\n}\n\n/* Slider element */\n.conf-slider input.jspsych-slider{\n  width: 100%;\n  -webkit-appearance: none;\n  appearance: none;\n  background: transparent;\n}\n\n/* ---------- Track with ticks (0–9 → tick every 10%) ---------- */\n/* Chrome/Safari */\n.conf-slider input.jspsych-slider::-webkit-slider-runnable-track{\n  height: 26px;\n  border-radius: 999px;\n  background-color: #e5e7eb;     /* light fill */\n  border: 2px solid #111827;      /* dark outline */\n\n  /* interior ticks + explicit left/right edge ticks */\n  background-image:\n    /* interior repeating ticks (excluding the rounded ends) */\n    repeating-linear-gradient(\n      to right,\n      transparent,\n      transparent calc(10% - 1px),\n      #6b7280 calc(10% - 1px),\n      #6b7280 10%\n    ),\n    /* leftmost tick */\n    linear-gradient(#6b7280, #6b7280),\n    /* rightmost tick */\n    linear-gradient(#6b7280, #6b7280);\n\n  /* inset ticks by 14px to clear the rounded caps */\n  background-size:\n    calc(100% - 28px) 100%,\n    1px 100%,\n    1px 100%;\n  background-position:\n    14px 0,                 /* repeating ticks start */\n    14px 0,                 /* leftmost tick */\n    calc(100% - 14px) 0;    /* rightmost tick */\n  background-repeat: no-repeat;\n}\n\n/* Firefox */\n.conf-slider input.jspsych-slider::-moz-range-track{\n  height: 26px;\n  border-radius: 999px;\n  background-color: #e5e7eb;\n  border: 2px solid #111827;\n\n  background-image:\n    repeating-linear-gradient(\n      to right,\n      transparent,\n      transparent calc(10% - 1px),\n      #6b7280 calc(10% - 1px),\n      #6b7280 10%\n    ),\n    linear-gradient(#6b7280, #6b7280),\n    linear-gradient(#6b7280, #6b7280);\n  background-size:\n    calc(100% - 28px) 100%,\n    1px 100%,\n    1px 100%;\n  background-position:\n    14px 0,\n    14px 0,\n    calc(100% - 14px) 0;\n  background-repeat: no-repeat;\n}\n\n/* ---------- Thumb ---------- */\n.conf-slider input.jspsych-slider::-webkit-slider-thumb{\n  -webkit-appearance: none;\n  appearance: none;\n  width: 26px; height: 26px; border-radius: 50%;\n  background: #fff; border: 2px solid #6b7280;\n  margin-top: -2px; /* centers on track */\n}\n.conf-slider input.jspsych-slider::-moz-range-thumb{\n  width: 26px; height: 26px; border-radius: 50%;\n  background: #fff; border: 2px solid #6b7280;\n}\n\n/* ---------- Labels (align with ticks) ---------- */\n.conf-slider .jspsych-slider-labels{\n  width: 100%;\n  margin: 8px auto 0 auto;\n  padding: 0 14px;          /* same 14px inset as ticks */\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* Optional: title helper if you used it in the prompt */\n.conf-slider .conf-slider__title{\n  margin: 0 0 12px;\n  text-align: center;\n}\n\n/* Keep bar visible, but hide thumb until user interacts */\n.conf-slider input.jspsych-slider::-webkit-slider-thumb {\n  opacity: 0;\n  transition: opacity 0.3s ease;\n}\n\n.conf-slider input.jspsych-slider.thumb-visible::-webkit-slider-thumb {\n  opacity: 1;\n}\n\n.conf-slider input.jspsych-slider::-moz-range-thumb {\n  opacity: 0;\n  transition: opacity 0.3s ease;\n}\n\n.conf-slider input.jspsych-slider.thumb-visible::-moz-range-thumb {\n  opacity: 1;\n}",
+    "headInjection": "",
+    "fullscreen": false,
+    "osfSave": false,
+    "osfProjectUrl": "",
+    "osfApiToken": "",
+    "sona": false,
+    "sonaExperimentId": "",
+    "sonaCreditToken": "",
+    "prolific": false,
+    "prolificRedirectCode": "",
+    "localSave": false,
+    "urlParams": "",
+    "variables": [
+      {
+        "name": "outcome_condition",
+        "value": "High, Low",
+        "randomize": true
+      },
+      {
+        "name": "rating_condition",
+        "value": "discreet, continuous",
+        "randomize": true
+      }
+    ]
+  }
+};
+      const pluginMap = {
+        "html-button-response": jsPsychHtmlButtonResponse,
+        "instructions": jsPsychInstructions,
+        "html-slider-response": jsPsychHtmlSliderResponse,
+        "preload": jsPsychPreload,
+        "survey-text": jsPsychSurveyText
+      };
+
+      function hydrate(input) {
+        if (Array.isArray(input)) return input.map(hydrate);
+        if (input && typeof input === "object") {
+          const hydrated = { ...input };
+          if (typeof hydrated.type === "string" && pluginMap[hydrated.type]) {
+            hydrated.type = pluginMap[hydrated.type];
+          }
+          for (const key of Object.keys(hydrated)) {
+            hydrated[key] = hydrate(hydrated[key]);
+          }
+          return hydrated;
+        }
+        return input;
+      }
+
+      function applyCustomCss(css) {
+        let style = document.getElementById('jspsych-builder-style');
+        const content = typeof css === 'string' ? css : '';
+        if (!content.trim()) {
+          if (style) style.remove();
+          return;
+        }
+        if (!style) {
+          style = document.createElement('style');
+          style.id = 'jspsych-builder-style';
+          document.head.appendChild(style);
+        }
+        style.textContent = content;
+      }
+
+      async function injectCustomHead(html) {
+        const content = typeof html === 'string' ? html : '';
+        if (!content.trim()) return;
+        const container = document.createElement('div');
+        container.innerHTML = content.trim();
+        const elements = Array.from(container.children);
+
+        // Process scripts sequentially and wait for each to load
+        for (const element of elements) {
+          if (element.tagName === 'SCRIPT') {
+            await new Promise((resolve, reject) => {
+              const script = document.createElement('script');
+              Array.from(element.attributes).forEach(attr => {
+                script.setAttribute(attr.name, attr.value);
+              });
+
+              if (element.src) {
+                script.src = element.src;
+                script.onload = resolve;
+                script.onerror = () => {
+                  console.warn('Failed to load script:', element.src);
+                  resolve(); // Continue even if script fails
+                };
+              } else {
+                script.textContent = element.textContent;
+                resolve();
+              }
+              document.head.appendChild(script);
+
+              // If no src, resolve immediately after appending
+              if (!element.src) {
+                resolve();
+              }
+            });
+          } else if (element.tagName === 'LINK' || element.tagName === 'STYLE' || element.tagName === 'META') {
+            document.head.appendChild(element.cloneNode(true));
+          }
+        }
+      }
+
+      function makeSeededRng(seed) {
+        let s = (seed ?? Date.now()) >>> 0;
+        return function () {
+          s += 0x6D2B79F5;
+          let t = Math.imul(s ^ (s >>> 15), 1 | s);
+          t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      function shuffle(arr, rng) {
+        for (let i = arr.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      function clone(value) {
+        return JSON.parse(JSON.stringify(value));
+      }
+
+      const GLOBAL_OBJECT = typeof globalThis !== "undefined" ? globalThis : (typeof window !== "undefined" ? window : {});
+      const ROW_CONTEXT_KEY = "__builderTimelineRow";
+      const TEMPLATE_PATTERN = /{{\s*([^}]+?)\s*}}/g;
+      const rowContextStack = [];
+
+      function coerceExperimentVariableValue(raw) {
+        if (typeof raw !== "string") return raw;
+        const trimmed = raw.trim();
+        if (!trimmed.length) return "";
+        if (trimmed === "true") return true;
+        if (trimmed === "false") return false;
+        if (trimmed === "null") return null;
+        if (trimmed === "undefined") return undefined;
+        if (/^-?\d+(\.\d+)?$/.test(trimmed)) {
+          const parsed = Number(trimmed);
+          if (!Number.isNaN(parsed)) return parsed;
+        }
+        if ((trimmed.startsWith('{') && trimmed.endsWith('}')) || (trimmed.startsWith('[') && trimmed.endsWith(']'))) {
+          try {
+            return JSON.parse(trimmed);
+          } catch (err) {
+            return raw;
+          }
+        }
+        if ((trimmed.startsWith('"') && trimmed.endsWith('"')) || (trimmed.startsWith("'") && trimmed.endsWith("'"))) {
+          return trimmed.slice(1, -1);
+        }
+        return raw;
+      }
+
+      function applyExperimentVariables(vars) {
+        if (!Array.isArray(vars)) return;
+        vars.forEach(entry => {
+          const name = typeof entry?.name === "string" ? entry.name.trim() : "";
+          if (!name) return;
+
+          let value;
+          if (entry.randomize && typeof entry.value === "string") {
+            // Parse comma-separated values and randomly select one
+            const options = entry.value.split(',').map(v => v.trim()).filter(v => v.length > 0);
+            if (options.length > 0) {
+              const randomIndex = Math.floor(Math.random() * options.length);
+              value = coerceExperimentVariableValue(options[randomIndex]);
+            } else {
+              value = coerceExperimentVariableValue(entry.value);
+            }
+          } else {
+            value = coerceExperimentVariableValue(entry.value);
+          }
+
+          try {
+            GLOBAL_OBJECT[name] = value;
+          } catch (err) {
+            console.warn('Could not set experiment variable', name, err);
+          }
+        });
+      }
+
+      function pushRowContext(row) {
+        rowContextStack.push(GLOBAL_OBJECT[ROW_CONTEXT_KEY] ?? null);
+        GLOBAL_OBJECT[ROW_CONTEXT_KEY] = row ?? null;
+      }
+
+      function popRowContext() {
+        const previous = rowContextStack.length ? rowContextStack.pop() : null;
+        GLOBAL_OBJECT[ROW_CONTEXT_KEY] = previous ?? null;
+      }
+
+      function withRowContext(row, fn) {
+        if (typeof fn !== "function") {
+          return () => {};
+        }
+        return function (...args) {
+          const previous = GLOBAL_OBJECT[ROW_CONTEXT_KEY] ?? null;
+          GLOBAL_OBJECT[ROW_CONTEXT_KEY] = row ?? null;
+          try {
+            return fn.apply(this, args);
+          } finally {
+            GLOBAL_OBJECT[ROW_CONTEXT_KEY] = previous;
+          }
+        };
+      }
+
+      function wrapOnStart(row, fn) {
+        return function (...args) {
+          pushRowContext(row);
+          if (typeof fn === "function") {
+            return fn.apply(this, args);
+          }
+        };
+      }
+
+      function wrapOnFinish(row, fn) {
+        return function (...args) {
+          try {
+            return typeof fn === "function" ? fn.apply(this, args) : undefined;
+          } finally {
+            popRowContext();
+          }
+        };
+      }
+
+      function parseTemplatePath(token) {
+        if (typeof token !== "string") return [];
+        return token
+          .replace(/\[(\w+)\]/g, '.\$1')
+          .split(".")
+          .map(part => part.trim())
+          .filter(Boolean);
+      }
+
+      function resolveTimelinePath(row, segments) {
+        if (!Array.isArray(segments) || !segments.length) return undefined;
+        let current = row;
+        for (const segment of segments) {
+          if (current === null || current === undefined) return undefined;
+          const key = /^\d+$/.test(segment) ? Number(segment) : segment;
+          current = current[key];
+        }
+        return current;
+      }
+
+      function renderTimelineTemplate(text, row) {
+        if (typeof text !== "string" || text.indexOf("{{") === -1 || !row) return text;
+        TEMPLATE_PATTERN.lastIndex = 0;
+        return text.replace(TEMPLATE_PATTERN, (_, token) => {
+          const segments = parseTemplatePath(token);
+          const resolved = resolveTimelinePath(row, segments);
+          if (resolved === undefined || resolved === null) return "";
+          return String(resolved);
+        });
+      }
+
+      function prepareTimelineRows(config, rng) {
+        if (!config) return [];
+        const rows = Array.isArray(config.rows) ? config.rows.map(clone) : [];
+        if (!rows.length) return [];
+        let orderRaw = typeof config.order === "string" ? config.order : ""
+        if (!orderRaw && (config.withReplacement || config.sampling?.withReplacement)) orderRaw = "random-with-replacement";
+        if (!orderRaw && config.sampling?.shuffle) orderRaw = "random";
+        if (!orderRaw) orderRaw = "sequential";
+        const order = orderRaw === "random" || orderRaw === "random-with-replacement" || orderRaw === "sequential"
+          ? orderRaw
+          : "sequential";
+        let sampleRaw = null;
+        for (const candidate of [config.sampleSize, config.sample, config.sampling?.count, config.sampling?.size]) {
+          const num = Number(candidate);
+          if (Number.isFinite(num) && num >= 1) {
+            sampleRaw = num;
+            break;
+          }
+        }
+        const sampleSize = Number.isFinite(sampleRaw) && sampleRaw >= 1 ? Math.max(1, Math.round(sampleRaw)) : null;
+        const samplingMode = config.samplingMode || "default";
+        if (samplingMode === "frequency" && Array.isArray(config.frequencies) && config.frequencies.length === rows.length) {
+          const expanded = [];
+          for (let i = 0; i < rows.length; i += 1) {
+            const freq = Math.max(0, Math.round(config.frequencies[i] || 0));
+            for (let j = 0; j < freq; j += 1) {
+              expanded.push(clone(rows[i]));
+            }
+          }
+          if (order === "random" || order === "random-with-replacement") {
+            shuffle(expanded, rng);
+          }
+          if (sampleSize && sampleSize < expanded.length) {
+            return expanded.slice(0, sampleSize);
+          }
+          return expanded;
+        }
+        if (samplingMode === "weighted" && Array.isArray(config.weights) && config.weights.length === rows.length) {
+          const totalWeight = config.weights.reduce((sum, w) => sum + Math.max(0, w || 0), 0);
+          if (totalWeight > 0) {
+            const probabilities = config.weights.map(w => Math.max(0, w || 0) / totalWeight);
+            const count = sampleSize ?? rows.length;
+            const picks = [];
+            for (let i = 0; i < count; i += 1) {
+              const rand = rng();
+              let cumulative = 0;
+              for (let j = 0; j < probabilities.length; j += 1) {
+                cumulative += probabilities[j];
+                if (rand <= cumulative) {
+                  picks.push(clone(rows[j]));
+                  break;
+                }
+              }
+            }
+            return picks;
+          }
+        }
+        if (order === "random-with-replacement") {
+          const count = sampleSize ?? rows.length;
+          if (!rows.length) return [];
+          const picks = [];
+          for (let i = 0; i < count; i += 1) {
+            const index = Math.floor(rng() * rows.length);
+            picks.push(clone(rows[index]));
+          }
+          return picks;
+        }
+        let working = order === "random" ? shuffle(rows.slice(), rng) : rows.slice();
+        if (sampleSize && sampleSize < working.length) {
+          working = working.slice(0, sampleSize);
+        }
+        return working;
+      }
+
+      function reviveFunction(source) {
+        if (typeof source !== "string" || !source.trim()) return null;
+        try {
+          const trimmed = source.trim();
+          try {
+            const fn = (0, eval)(`(${trimmed})`);
+            if (typeof fn === "function") return fn;
+          } catch (e) {}
+          const isFunctionLike = /^(\(.*?\)\s*=>|\bfunction\s*\(|^\([^)]*\)\s*=>)/.test(trimmed);
+          if (isFunctionLike) {
+            console.warn("Could not evaluate function:", trimmed);
+            return null;
+          }
+          const wrappedFn = new Function("data", trimmed);
+          return wrappedFn;
+        } catch (err) {
+          console.warn("Could not evaluate custom function:", err, "Source:", source);
+          return null;
+        }
+      }
+
+      function reviveFunctionWithGlobals(source, globalVarNames = []) {
+        if (typeof source !== "string" || !source.trim()) return null;
+        if (!Array.isArray(globalVarNames) || globalVarNames.length === 0) {
+          return reviveFunction(source);
+        }
+        try {
+          const trimmed = source.trim();
+          const isFunctionLike = /^(\(.*?\)\s*=>|\bfunction\s*\(|^\([^)]*\)\s*=>)/.test(trimmed);
+          const params = globalVarNames.join(", ");
+          return function(...args) {
+            const globalObj = typeof window !== "undefined" ? window : globalThis;
+            const globalValues = globalVarNames.map(name => globalObj[name]);
+            let result;
+            if (isFunctionLike) {
+              const factory = new Function(params, `return ${trimmed};`);
+              const fn = factory(...globalValues);
+              result = typeof fn === "function" ? fn(...args) : fn;
+            } else {
+              const fn = new Function(params, `return ${trimmed};`);
+              result = fn(...globalValues);
+            }
+            return result;
+          };
+        } catch (err) {
+          console.warn("Could not evaluate custom function with globals:", err, "Source:", source);
+          return reviveFunction(source);
+        }
+      }
+
+      function reviveData(value, row) {
+        if (!value) return null;
+        if (Array.isArray(value)) return clone(value);
+        if (value && typeof value === "object") {
+          if (value.__builderType === "data") {
+            const source = typeof value.source === "string" ? value.source : "";
+            if (!source.trim()) return {};
+            try {
+              const hasReturn = /\breturn\b/.test(source);
+              const factory = new Function(
+                "jsPsych",
+                "row",
+                hasReturn ? source : `return (${source});`
+              );
+              const jsPsychRef = typeof jsPsych !== "undefined" ? jsPsych : undefined;
+              const result = factory(jsPsychRef, row ?? {});
+              if (result === undefined || result === null) return {};
+              if (typeof result === "object") return result;
+              return { value: result };
+            } catch (err) {
+              console.warn("Could not evaluate custom data code:", err);
+              return {};
+            }
+          }
+          return clone(value);
+        }
+        return value;
+      }
+
+      function resolveParam(value, row) {
+        if (typeof value === "string") {
+          return row ? renderTimelineTemplate(value, row) : value;
+        }
+        if (Array.isArray(value)) return value.map(item => resolveParam(item, row));
+        if (value && typeof value === "object") {
+          if (value.__builderType === "function") {
+            const revived = reviveFunction(value.source) ?? (() => {});
+            return row ? withRowContext(row, revived) : revived;
+          }
+          if (value.__builderType === "data") {
+            return reviveData(value, row) ?? {};
+          }
+          if ("bind" in value) {
+            const segments = typeof value.bind === "string" ? parseTemplatePath(value.bind) : [];
+            return row ? resolveTimelinePath(row, segments) : undefined;
+          }
+          const output = {};
+          for (const key in value) {
+            output[key] = resolveParam(value[key], row);
+          }
+          return output;
+        }
+        return value;
+      }
+
+      function getTrialLabel(node) {
+        if (!node) return "";
+        const fromLabel = typeof node.label === "string" ? node.label.trim() : "";
+        if (fromLabel.length) {
+          return fromLabel;
+        }
+        const fromName = typeof node.name === "string" ? node.name.trim() : "";
+        if (fromName.length) {
+          return fromName;
+        }
+        return typeof node.id === "string" ? node.id : "";
+      }
+
+      function compileNode(id, map, row, globalVarNames = []) {
+        const node = map.get(id);
+        if (!node) throw new Error("Unknown node " + id);
+        if (node.kind === "trial") {
+          // Handle generic plugin specially
+          if (node.plugin === "generic") {
+            console.log("Processing generic plugin node:", node);
+            const genericCode = (node.genericTrialCode || '').trim();
+            const pluginTypeName = (node.pluginTypeName || '').trim();
+            console.log("Generic code:", genericCode);
+            console.log("Plugin type name:", pluginTypeName);
+            if (!genericCode) {
+              console.warn("Generic plugin trial has no code:", node.id);
+              return [];
+            }
+            if (!pluginTypeName) {
+              console.warn("Generic plugin trial has no type name:", node.id);
+              return [];
+            }
+            let params;
+            try {
+              const evaluator = new Function('return (' + genericCode + ');');
+              params = evaluator();
+            } catch (err) {
+              console.error("Failed to parse generic trial code:", err);
+              return [];
+            }
+            let pluginType;
+            try {
+              pluginType = window[pluginTypeName];
+              if (!pluginType) {
+                console.error("Plugin type not found in window:", pluginTypeName);
+                console.error("Available window properties:", Object.keys(window).filter(k => k.startsWith("jsP")));
+                return [];
+              }
+              console.log("Successfully resolved plugin type:", pluginTypeName, pluginType);
+            } catch (err) {
+              console.error("Failed to resolve plugin type:", pluginTypeName, err);
+              return [];
+            }
+            const compiled = { type: pluginType, ...params };
+            console.log("Generic plugin compiled trial:", compiled);
+            const conditional = resolveTimelineFunction(node.conditional_function ?? node.conditionalFunction, globalVarNames);
+            if (conditional) {
+              compiled.conditional_function = conditional;
+            }
+            return [compiled];
+          }
+
+          const params = {};
+          for (const key in node.params || {}) {
+            params[key] = resolveParam(node.params[key], row);
+          }
+          const baseData = node.data ? reviveData(node.data, row ?? {}) : null;
+          const rowData = row ? clone(row) : null;
+          const data = rowData
+            ? { ...(baseData && typeof baseData === "object" ? baseData : {}), ...rowData }
+            : baseData && typeof baseData === "object" ? baseData : {};
+          if (data && typeof data === "object") {
+            const trialLabel = getTrialLabel(node);
+            if (trialLabel.length && !Object.prototype.hasOwnProperty.call(data, "trial_label")) {
+              data.trial_label = trialLabel;
+            }
+          }
+          const compiled = { type: node.plugin, ...params, data };
+          if (rowData) {
+            compiled._builderRow = rowData;
+            compiled.on_start = wrapOnStart(rowData, compiled.on_start);
+            compiled.on_finish = wrapOnFinish(rowData, compiled.on_finish);
+            if (typeof compiled.on_load === "function") {
+              compiled.on_load = withRowContext(rowData, compiled.on_load);
+            }
+            if (typeof compiled.on_stimulus_render === "function") {
+              compiled.on_stimulus_render = withRowContext(rowData, compiled.on_stimulus_render);
+            }
+          }
+          const conditional = resolveTimelineFunction(node.conditional_function ?? node.conditionalFunction, globalVarNames);
+          if (conditional) {
+            compiled.conditional_function = rowData ? withRowContext(rowData, conditional) : conditional;
+          }
+          return [compiled];
+        }
+        return [];
+      }
+
+      function compileTrialsSequence(ids, map, row, globalVarNames = []) {
+        const results = [];
+        if (!Array.isArray(ids)) return results;
+        ids.forEach(entry => {
+          const id = typeof entry === "string" ? entry : entry && typeof entry === "object" ? entry.id : null;
+          if (!id) return;
+          results.push(...compileNode(id, map, row, globalVarNames));
+        });
+        return results;
+      }
+
+      function resolveTimelineFunction(value, globalVarNames = []) {
+        if (!value) return undefined;
+        if (value.__builderType === "function") {
+          return reviveFunctionWithGlobals(value.source, globalVarNames) ?? undefined;
+        }
+        if (typeof value === "string") {
+          return reviveFunctionWithGlobals(value, globalVarNames) ?? undefined;
+        }
+        return undefined;
+      }
+
+      function compileExperiment(config) {
+        const rng = makeSeededRng(config.meta?.seed);
+        const map = new Map(config.nodes.map(node => [node.id, node]));
+        const globalVarNames = [];
+        if (config.options && Array.isArray(config.options.variables)) {
+          config.options.variables.forEach(v => {
+            const name = typeof v?.name === "string" ? v.name.trim() : "";
+            if (name) globalVarNames.push(name);
+          });
+        }
+        const timeline = [];
+        const blocks = Array.isArray(config.blocks) ? config.blocks : [];
+        for (const block of blocks) {
+          if (!block || typeof block !== "object") continue;
+          const repetitionsRaw = typeof block.repetitions === "number" ? block.repetitions : parseFloat(block.repetitions);
+          const repetitions = Number.isFinite(repetitionsRaw) && repetitionsRaw >= 1 ? Math.max(1, Math.round(repetitionsRaw)) : 1;
+          const conditionalFn = resolveTimelineFunction(block.conditional_function ?? block.conditionalFunction, globalVarNames);
+          const onStartFn = resolveTimelineFunction(block.on_timeline_start ?? block.onTimelineStart, globalVarNames);
+          const onFinishFn = resolveTimelineFunction(block.on_timeline_finish ?? block.onTimelineFinish, globalVarNames);
+          if (block.table && block.root) {
+            const rows = prepareTimelineRows(block.table, rng);
+            rows.forEach(row => {
+              const sequence = compileNode(block.root, map, row, globalVarNames);
+              if (!sequence.length) return;
+              if (sequence.length === 1 && !conditionalFn && !onStartFn && !onFinishFn && repetitions <= 1) {
+                timeline.push(...sequence);
+              } else {
+                const entry = { timeline: sequence };
+                if (repetitions > 1) entry.repetitions = repetitions;
+                if (onStartFn) entry.on_timeline_start = withRowContext(row, onStartFn);
+                if (onFinishFn) entry.on_timeline_finish = withRowContext(row, onFinishFn);
+                if (conditionalFn) entry.conditional_function = withRowContext(row, conditionalFn);
+                timeline.push(entry);
+              }
+            });
+            continue;
+          }
+          if (block.table && Array.isArray(block.timeline) && block.timeline.length) {
+            const rows = prepareTimelineRows(block.table, rng);
+            rows.forEach(row => {
+              const sequence = compileTrialsSequence(block.timeline, map, row, globalVarNames);
+              if (!sequence.length) return;
+              const entry = { timeline: sequence };
+              if (repetitions > 1) entry.repetitions = repetitions;
+              if (onStartFn) entry.on_timeline_start = withRowContext(row, onStartFn);
+              if (onFinishFn) entry.on_timeline_finish = withRowContext(row, onFinishFn);
+              if (conditionalFn) entry.conditional_function = withRowContext(row, conditionalFn);
+              timeline.push(entry);
+            });
+            continue;
+          }
+          if (Array.isArray(block.timeline) && block.timeline.length) {
+            const sequence = compileTrialsSequence(block.timeline, map, null, globalVarNames);
+            if (!sequence.length) continue;
+            if (repetitions > 1 || onStartFn || onFinishFn || conditionalFn) {
+              const entry = { timeline: sequence };
+              if (repetitions > 1) entry.repetitions = repetitions;
+              if (onStartFn) entry.on_timeline_start = onStartFn;
+              if (onFinishFn) entry.on_timeline_finish = onFinishFn;
+              if (conditionalFn) entry.conditional_function = conditionalFn;
+              timeline.push(entry);
+            } else {
+              timeline.push(...sequence);
+            }
+            continue;
+          }
+          if (block.root) {
+            const sequence = compileNode(block.root, map, null, globalVarNames);
+            if (!sequence.length) continue;
+            if (repetitions > 1 || onStartFn || onFinishFn || conditionalFn) {
+              const entry = { timeline: sequence };
+              if (repetitions > 1) entry.repetitions = repetitions;
+              if (onStartFn) entry.on_timeline_start = onStartFn;
+              if (onFinishFn) entry.on_timeline_finish = onFinishFn;
+              if (conditionalFn) entry.conditional_function = conditionalFn;
+              timeline.push(entry);
+            } else {
+              timeline.push(...sequence);
+            }
+          }
+        }
+        return { timeline };
+      }
+
+      function runCustomJs(code, context) {
+        if (typeof code !== "string" || !code.trim()) return;
+        try {
+          const fn = new Function("jsPsych", "experiment", "timeline", code);
+          fn(context.jsPsych, context.experiment, context.timeline);
+        } catch (err) {
+          console.error("Custom experiment JavaScript failed", err);
+        }
+      }
+
+      function canAttemptOsfUpload() {
+        const origin = window.location.origin;
+        const protocol = window.location.protocol;
+        if (!protocol || protocol === "file:") return false;
+        if (origin === "null") return false;
+        return true;
+      }
+
+      function extractOsfProjectId(input) {
+        if (typeof input !== "string") return "";
+        let raw = input.trim();
+        if (!raw) return "";
+        try {
+          if (!/^https?:\/\//i.test(raw)) raw = `https://${raw}`;
+          const url = new URL(raw);
+          const host = url.hostname.toLowerCase();
+          const segments = url.pathname.split("/").map(part => part.trim()).filter(Boolean);
+          const takeFirst = () => {
+            const value = segments[0];
+            if (value && /^[a-z0-9]{4,10}$/i.test(value)) return value.toLowerCase();
+            return "";
+          };
+          if (host === "osf.io" || host.endsWith(".osf.io")) {
+            if (segments[0] && /^projects?$/i.test(segments[0])) segments.shift();
+            const candidate = takeFirst();
+            if (candidate) return candidate;
+          }
+          if (host === "api.osf.io") {
+            if (segments[0] && /^v2$/i.test(segments[0])) segments.shift();
+            if (segments[0] && /^(nodes|registrations)$/i.test(segments[0])) segments.shift();
+            const candidate = takeFirst();
+            if (candidate) return candidate;
+          }
+          if (host === "files.osf.io") {
+            if (segments[0] && /^v1$/i.test(segments[0])) segments.shift();
+            if (segments[0] && /^resources$/i.test(segments[0])) segments.shift();
+            const candidate = takeFirst();
+            if (candidate) return candidate;
+          }
+        } catch (err) {
+          // fall through to regex parsing
+        }
+        const regexes = [
+          /osf\.io\/(?:project[s]?\/)?([a-z0-9]{4,10})/i,
+          /api\.osf\.io\/v2\/(?:nodes|registrations)\/([a-z0-9]{4,10})/i,
+          /files\.osf\.io\/v1\/resources\/([a-z0-9]{4,10})/i
+        ];
+        for (const regex of regexes) {
+          const match = raw.match(regex);
+          if (match && match[1]) return match[1].toLowerCase();
+        }
+        return "";
+      }
+
+      async function readOsfError(response) {
+        if (!response || typeof response.text !== "function") return null;
+        try {
+          const clone = response.clone ? response.clone() : response;
+          const payload = await clone.text();
+          if (!payload) return null;
+          try {
+            const asJson = JSON.parse(payload);
+            if (asJson?.errors && Array.isArray(asJson.errors)) return asJson.errors;
+            return asJson;
+          } catch (err) {
+            return payload;
+          }
+        } catch (err) {
+          return null;
+        }
+      }
+
+      // Wait for all scripts to load before running
+      async function waitForScripts() {
+        return new Promise((resolve) => {
+          if (document.readyState === 'complete') {
+            resolve();
+          } else {
+            window.addEventListener('load', resolve);
+          }
+        });
+      }
+
+      (async () => {
+        await waitForScripts();
+        const options = experiment.options ?? {};
+        const rawCss = typeof options.rawCss === "string" ? options.rawCss : "";
+        const rawJs = typeof options.rawJs === "string" ? options.rawJs : "";
+        const headInjection = typeof options.headInjection === "string" ? options.headInjection : "";
+        const enforceFullscreen = !!options.fullscreen;
+        const allowMobile = !!options.allowMobile;
+
+        // Check for mobile device
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobile && !allowMobile) {
+          document.body.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; background: #1a1a1a; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+              <div style="max-width: 500px; text-align: center;">
+                <h1 style="font-size: 1.5rem; margin-bottom: 1rem;">Desktop Required</h1>
+                <p style="color: #aaaaaa; line-height: 1.6;">This experiment requires a desktop or laptop computer. Please access this study from a non-mobile device.</p>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        applyExperimentVariables(options.variables);
+        applyCustomCss(rawCss);
+        await injectCustomHead(headInjection);
+        const { timeline } = compileExperiment(experiment);
+        const hydratedTimeline = hydrate(timeline);
+        let handleFullscreenExit = () => {};
+        let handleFullscreenEnter = () => {};
+        const jsPsych = initJsPsych({
+          on_interaction_data_update(data) {
+            if (!enforceFullscreen) return;
+            if (data?.event === "fullscreenexit") {
+              handleFullscreenExit();
+            } else if (data?.event === "fullscreenenter") {
+              handleFullscreenEnter();
+            }
+          }
+        });
+        GLOBAL_OBJECT.__builderJsPsych = jsPsych;
+        if (!GLOBAL_OBJECT.jsPsych || typeof GLOBAL_OBJECT.jsPsych.timelineVariable !== "function") {
+          GLOBAL_OBJECT.jsPsych = jsPsych;
+        }
+        const originalEvaluateTimelineVariable = typeof jsPsych.evaluateTimelineVariable === "function"
+          ? jsPsych.evaluateTimelineVariable.bind(jsPsych)
+          : null;
+        jsPsych.evaluateTimelineVariable = function (key) {
+          const row = GLOBAL_OBJECT[ROW_CONTEXT_KEY];
+          if (row && Object.prototype.hasOwnProperty.call(row, key)) {
+            return row[key];
+          }
+          if (originalEvaluateTimelineVariable) {
+            return originalEvaluateTimelineVariable(key);
+          }
+          return undefined;
+        };
+        const originalTimelineVariable = typeof jsPsych.timelineVariable === "function"
+          ? jsPsych.timelineVariable.bind(jsPsych)
+          : null;
+        jsPsych.timelineVariable = function (key, execute = true) {
+          const row = GLOBAL_OBJECT[ROW_CONTEXT_KEY];
+          if (row && Object.prototype.hasOwnProperty.call(row, key)) {
+            if (execute === false) {
+              return () => jsPsych.timelineVariable(key);
+            }
+            return row[key];
+          }
+          if (originalTimelineVariable) {
+            return originalTimelineVariable(key, execute);
+          }
+          if (execute === false) {
+            return () => jsPsych.timelineVariable(key);
+          }
+          return undefined;
+        };
+        const searchParams = new URLSearchParams(window.location.search);
+        if (searchParams && Array.from(searchParams.keys()).length) {
+          const captured = {};
+          searchParams.forEach((value, key) => {
+            if (Object.prototype.hasOwnProperty.call(captured, key)) return;
+            const allValues = searchParams.getAll(key);
+            if (allValues.length > 1) {
+              captured[key] = allValues.join(",");
+            } else {
+              captured[key] = value ?? "";
+            }
+          });
+          if (Object.keys(captured).length) {
+            jsPsych.data.addProperties(captured);
+          }
+        }
+        // Add global variables to data
+        if (Array.isArray(options.variables) && options.variables.length > 0) {
+          const globalVars = {};
+          options.variables.forEach(entry => {
+            const name = typeof entry?.name === "string" ? entry.name.trim() : "";
+            if (!name) return;
+            try {
+              if (Object.prototype.hasOwnProperty.call(GLOBAL_OBJECT, name)) {
+                globalVars[name] = GLOBAL_OBJECT[name];
+              }
+            } catch (err) {
+              // Skip if cannot access
+            }
+          });
+          if (Object.keys(globalVars).length) {
+            jsPsych.data.addProperties(globalVars);
+          }
+        }
+        if (enforceFullscreen) {
+          const OVERLAY_ID = "jspsych-fullscreen-guard";
+          let overlay = null;
+          let pausedForFullscreen = false;
+          const requestFullscreen = () => {
+            if (jsPsych?.pluginAPI?.requestFullscreen) {
+              jsPsych.pluginAPI.requestFullscreen(document.documentElement).catch(() => {});
+            } else if (document.documentElement.requestFullscreen) {
+              document.documentElement.requestFullscreen().catch(() => {});
+            }
+          };
+          const ensureOverlay = () => {
+            if (overlay) return overlay;
+            overlay = document.getElementById(OVERLAY_ID);
+            if (overlay) return overlay;
+            overlay = document.createElement('div');
+            overlay.id = OVERLAY_ID;
+            overlay.style.position = 'fixed';
+            overlay.style.inset = '0';
+            overlay.style.display = 'none';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.background = 'rgba(0, 0, 0, 0.88)';
+            overlay.style.zIndex = '9999';
+            overlay.style.color = '#ffffff';
+            overlay.style.textAlign = 'center';
+            overlay.style.padding = '2rem';
+            overlay.style.fontFamily = 'sans-serif';
+            overlay.style.flexDirection = 'column';
+            overlay.style.gap = '1.5rem';
+            const message = document.createElement('p');
+            message.textContent = 'Please return to fullscreen to continue the experiment.';
+            message.style.fontSize = '1.2rem';
+            message.style.margin = '0';
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = 'Return to fullscreen';
+            button.style.padding = '0.75rem 1.5rem';
+            button.style.fontSize = '1rem';
+            button.style.border = 'none';
+            button.style.borderRadius = '4px';
+            button.style.cursor = 'pointer';
+            button.style.background = '#4a90e2';
+            button.style.color = '#ffffff';
+            button.addEventListener('click', () => {
+              requestFullscreen();
+            });
+            overlay.append(message, button);
+            document.body.appendChild(overlay);
+            return overlay;
+          };
+          const showOverlay = () => {
+            const el = ensureOverlay();
+            el.style.display = 'flex';
+          };
+          const hideOverlay = () => {
+            if (overlay) overlay.style.display = 'none';
+          };
+          handleFullscreenExit = () => {
+            if (document.fullscreenElement) return;
+            if (!pausedForFullscreen) {
+              pausedForFullscreen = true;
+              try { jsPsych.pauseExperiment(); } catch (err) {}
+              showOverlay();
+            }
+            requestFullscreen();
+          };
+          handleFullscreenEnter = () => {
+            if (!pausedForFullscreen) return;
+            pausedForFullscreen = false;
+            hideOverlay();
+            try { jsPsych.resumeExperiment(); } catch (err) {}
+          };
+          document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+              handleFullscreenEnter();
+            } else {
+              handleFullscreenExit();
+            }
+          });
+        }
+        runCustomJs(rawJs, { jsPsych, experiment, timeline: hydratedTimeline });
+        await jsPsych.run(hydratedTimeline);
+
+        // SONA credit granting
+        if (options.sona && options.sonaExperimentId && options.sonaCreditToken) {
+          const urlParams = new URLSearchParams(window.location.search);
+          const sonaId = urlParams.get('survey_code') || urlParams.get('SONAID') || '';
+          if (sonaId) {
+            const creditUrl = `https://sydneypsych.sona-systems.com/webstudy_credit.aspx?experiment_id=${options.sonaExperimentId}&credit_token=${options.sonaCreditToken}&survey_code=${sonaId}&id=${sonaId}`;
+            window.location.href = creditUrl;
+          } else {
+            console.warn('SONA credit enabled but survey_code parameter not found in URL');
+          }
+        }
+        if (options.prolific && typeof options.prolificRedirectCode === "string" && options.prolificRedirectCode.trim().length) {
+          const redirectCode = encodeURIComponent(options.prolificRedirectCode.trim());
+          window.location.href = `https://app.prolific.com/submissions/complete?cc=${redirectCode}`;
+        }
+
+        if (options.osfSave && typeof options.osfProjectUrl === "string" && options.osfProjectUrl.trim().length && typeof options.osfApiToken === "string" && options.osfApiToken.trim().length) {
+          if (!canAttemptOsfUpload()) {
+            console.warn('OSF upload skipped: authenticated requests are blocked from this origin. Host the experiment over https:// (or http://) to enable OSF uploads.');
+          } else {
+            try {
+              const csv = jsPsych.data.get().csv();
+              const blob = new Blob([csv], { type: 'text/csv' });
+              const fileName = `jspsych-data-${Date.now()}.csv`;
+              const projectUrl = options.osfProjectUrl.trim();
+              const projectId = extractOsfProjectId(projectUrl);
+              const osfToken = options.osfApiToken.trim();
+              if (!projectId) {
+                console.warn('Could not determine OSF project id from', projectUrl);
+              } else {
+                const uploadUrl = `https://files.osf.io/v1/resources/${projectId}/providers/osfstorage/?kind=file&name=${encodeURIComponent(fileName)}`;
+                const uploadResponse = await fetch(uploadUrl, {
+                  method: 'PUT',
+                  headers: {
+                    Authorization: `Bearer ${osfToken}`,
+                    'Content-Type': 'text/csv'
+                  },
+                  body: blob
+                });
+                if (!uploadResponse.ok) {
+                  console.warn('OSF upload failed with status', uploadResponse.status);
+                  const detail = await readOsfError(uploadResponse);
+                  if (detail) console.warn('OSF response body:', detail);
+                  if (uploadResponse.status === 401 || uploadResponse.status === 403) {
+                    console.warn('Check that your OSF API token is valid and includes osf.storage write access.');
+                  } else if (uploadResponse.status === 405) {
+                    console.warn('Received 405 from OSF. Browsers sometimes block the required preflight request when running from local files; hosting the experiment over https:// usually resolves this.');
+                  }
+                } else {
+                  console.log('OSF upload successful');
+                }
+              }
+            } catch (err) {
+              console.warn('Could not upload data to OSF.', err);
+            }
+          }
+        }
+
+        if (options.localSave) {
+          try {
+            jsPsych.data.get().localSave('csv', 'my_experiment_data.csv');
+          } catch (err) {
+            console.warn('Could not save data locally.', err);
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
